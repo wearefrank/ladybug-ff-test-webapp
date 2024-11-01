@@ -17,4 +17,13 @@
 			<type>war</type>
 		</dependency>
 	</dependencies>
+
+	<repositories>
+		<!-- Enable F!F timestamp versions -->
+		<repository>
+			<id>ibissource</id>
+			<name>Ibissource</name>
+			<url>https://nexus.frankframework.org/content/repositories/public</url>
+		</repository>
+	</repositories>
 </project>
