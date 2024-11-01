@@ -1,2 +1,5 @@
+.classpath
+.settings
+.idea
 target
 FrankConfig.xsd
