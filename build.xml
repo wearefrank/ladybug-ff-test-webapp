@@ -6,6 +6,8 @@
 		<exec executable="${exe}" vmlauncher="false" failonerror="true">
 			<arg value="${arg}"/>
 			<arg value="-Dproject.dir=${project.dir}"/>
+			<!-- <arg value="-Dibistesttool.custom=ViewsTest"/> -->
+			<!-- <arg value="-Ddtap.stage=PRD"/> -->
 		</exec>
 	</target>
 </project>
