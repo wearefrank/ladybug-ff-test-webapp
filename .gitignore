@@ -2,4 +2,5 @@
 /.idea/
 /target/
 .classpath
+build.properties
 FrankConfig.xsd
