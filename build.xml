@@ -1,12 +1,9 @@
 <project default="restart-ladybug-ff-test-webapp" xmlns:if="ant:if" xmlns:unless="ant:unless">
 	<target name="restart-ladybug-ff-test-webapp">
 		<basename property="project.dir" file="${basedir}"/>
-		<echo message="RESTART-LADYBUG-FF-TEST-WEBAPP" />
 		<condition property="exe" value="../frank-runner/restart.bat" else="/bin/bash"><os family="windows"/></condition>
 		<condition property="arg" value="../frank-runner/restart.sh" else=""><os family="unix"/></condition>
 		<property file="build.properties"/>
-		<echo message="configurations.dir=${configurations.dir}" />
-		<echo message="custom=${custom}" />
 		<exec executable="${exe}" vmlauncher="false" failonerror="true">
 			<arg value="${arg}"/>
 			<arg value="-Dproject.dir=${project.dir}"/>
