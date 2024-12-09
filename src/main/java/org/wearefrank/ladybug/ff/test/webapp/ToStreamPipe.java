@@ -17,7 +17,9 @@ import org.frankframework.stream.Message;
 public class ToStreamPipe extends FixedForwardPipe {
     public static enum StreamKind {
         BINARY,
-        CHARACTER
+        CHARACTER,
+        BINARY_EMPTY,
+        CHARACTER_EMPTY
     }
 
     private StreamKind streamKind = StreamKind.BINARY;
@@ -28,19 +30,35 @@ public class ToStreamPipe extends FixedForwardPipe {
 
     public PipeRunResult doPipe(Message message, PipeLineSession session) throws PipeRunException {
         try {
-            InputStream is = message.asInputStream();
-            String s = readString(is);
-            // Make output different from input
-            s = s + "_suffix";
             switch(streamKind) {
                 case CHARACTER: {
-                        Reader resultReader = new StringReader(s);
-                        return new PipeRunResult(getSuccessForward(), resultReader);
-                    }
+                    InputStream is = message.asInputStream();
+                    String s = readString(is);
+                    // Make output different from input
+                    s = s + "_suffix";
+                    Reader resultReader = new StringReader(s);
+                    Message m = new Message(resultReader);
+                    return new PipeRunResult(getSuccessForward(), m);
+                }
                 case BINARY: {
-                        InputStream resultIs = string2InputStream(s);
-                        return new PipeRunResult(getSuccessForward(), resultIs);
-                    }
+                    InputStream is = message.asInputStream();
+                    String s = readString(is);
+                    // Make output different from input
+                    s = s + "_suffix";
+                    InputStream resultIs = string2InputStream(s);
+                    Message m = new Message(resultIs);
+                    return new PipeRunResult(getSuccessForward(), m);
+                }
+                case BINARY_EMPTY: {
+                    InputStream resultIs = new ByteArrayInputStream(new byte[] {});
+                    Message m = new Message(resultIs);
+                    return new PipeRunResult(getSuccessForward(), resultIs);
+                }
+                case CHARACTER_EMPTY: {
+                    Reader resultReader = new StringReader("");
+                    Message m = new Message(resultReader);
+                    return new PipeRunResult(getSuccessForward(), resultReader);
+                }
             }
         }
         catch(IOException e) {
