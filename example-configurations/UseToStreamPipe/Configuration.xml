@@ -24,4 +24,24 @@
             <EchoPipe name="discard" getInputFromFixedValue="New value" />
         </Pipeline>
     </Adapter>
+    <Adapter name="UseToStreamPipeEmptyBin">
+        <Receiver>
+            <JavaListener name="UseToStreamPipeEmptyBin" />
+        </Receiver>
+        <Pipeline>
+            <Pipe className="org.wearefrank.ladybug.ff.test.webapp.ToStreamPipe" name="testPipe"
+                  streamKind="BINARY_EMPTY" />
+            <EchoPipe name="read-empty" />
+        </Pipeline>
+    </Adapter>
+    <Adapter name="UseToStreamPipeEmptyChar">
+        <Receiver>
+            <JavaListener name="UseToStreamPipeEmptyChar" />
+        </Receiver>
+        <Pipeline>
+            <Pipe className="org.wearefrank.ladybug.ff.test.webapp.ToStreamPipe" name="testPipe"
+                  streamKind="CHARACTER_EMPTY" />
+            <EchoPipe name="read-empty" />
+        </Pipeline>
+    </Adapter>
 </Configuration>
