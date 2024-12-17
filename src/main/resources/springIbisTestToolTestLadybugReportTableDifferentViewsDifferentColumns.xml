@@ -14,6 +14,7 @@
                 <value>storageId</value>
                 <value>name</value>
                 <value>correlationId</value>
+                <value>status</value>
             </list>
         </property>
     </bean>
