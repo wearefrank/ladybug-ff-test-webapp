@@ -44,4 +44,14 @@
             <EchoPipe name="read-empty" />
         </Pipeline>
     </Adapter>
+    <Adapter name="UseToStreamPipeCharacterNull">
+        <Receiver>
+            <JavaListener name="UseToStreamPipeCharacterNull" />
+        </Receiver>
+        <Pipeline>
+            <Pipe className="org.wearefrank.ladybug.ff.test.webapp.ToStreamPipe" name="testPipe"
+                  streamKind="CHARACTER_NULL" />
+            <EchoPipe name="read-null" />
+        </Pipeline>
+    </Adapter>
 </Configuration>

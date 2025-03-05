@@ -19,7 +19,9 @@ public class ToStreamPipe extends FixedForwardPipe {
         BINARY,
         CHARACTER,
         BINARY_EMPTY,
-        CHARACTER_EMPTY
+        CHARACTER_EMPTY,
+        // Not a stream, just a string that happens to be null
+        CHARACTER_NULL
     }
 
     private StreamKind streamKind = StreamKind.BINARY;
@@ -58,6 +60,11 @@ public class ToStreamPipe extends FixedForwardPipe {
                     Reader resultReader = new StringReader("");
                     Message m = new Message(resultReader);
                     return new PipeRunResult(getSuccessForward(), resultReader);
+                }
+                case CHARACTER_NULL: {
+                    String s = null;
+                    Message m = new Message(s);
+                    return new PipeRunResult(getSuccessForward(), m);
                 }
             }
         }
