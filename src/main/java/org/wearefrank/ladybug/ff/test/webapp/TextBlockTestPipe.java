@@ -1,5 +1,7 @@
 package org.wearefrank.ladybug.ff.test.webapp;
 
+import java.io.IOException;
+
 import org.frankframework.core.PipeLineSession;
 import org.frankframework.core.PipeRunException;
 import org.frankframework.core.PipeRunResult;
@@ -10,18 +12,27 @@ public class TextBlockTestPipe extends FixedForwardPipe {
 	// We use digits 0-9, letters a-z and letters A-Z.
 	private static final int NUM_SYMBOLS = 10 + 2 * 26;
 
-	private int rows;
-	private int columns;
-
-	public void setRows(int rows) {
-		this.rows = rows;
-	}
-
-	public void setColumns(int columns) {
-		this.columns = columns;
-	}
-
 	public PipeRunResult doPipe(Message message, PipeLineSession session) throws PipeRunException {
+		String messageString = null;
+		try {
+			messageString = message.asString();
+		}
+		catch(IOException e) {
+			throw new PipeRunException(this, "Message should be like: \"<numRows> <numCols>\"", e);
+		}
+		String[] numberStrings = messageString.split(" ");
+		Integer numRows = null;
+		Integer numCols = null;
+		try {
+			numRows = Integer.parseInt(numberStrings[0]);
+			numCols = Integer.parseInt(numberStrings[1]);
+		} catch(NumberFormatException e) {
+			throw new PipeRunException(this, "Message should be like: \"<numRows> <numCols>\"", e);
+		}
+		return new PipeRunResult(getSuccessForward(), makeTextBlock(numRows, numCols));
+	}
+
+	private String makeTextBlock(int rows, int columns) {
 		StringBuilder sb = new StringBuilder();
 		for (int rowIndex = 0; rowIndex < rows; ++rowIndex) {
 			for (int columnIndex = 0; columnIndex < columns; ++columnIndex) {
@@ -33,7 +44,7 @@ public class TextBlockTestPipe extends FixedForwardPipe {
 			}
 			sb.append('\n');
 		}
-		return new PipeRunResult(getSuccessForward(), sb.toString());
+		return sb.toString();
 	}
 
 	private char index2char(int index) {

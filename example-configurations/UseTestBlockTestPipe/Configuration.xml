@@ -25,7 +25,7 @@
 		</Receiver>
 		<Pipeline>
 			<pipe className="org.wearefrank.ladybug.ff.test.webapp.TextBlockTestPipe"
-				name="testPipe" rows="3" columns="63">
+				name="testPipe">
 			</pipe>
 		</Pipeline>
 	</Adapter>
