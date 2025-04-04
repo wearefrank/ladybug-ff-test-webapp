@@ -13,15 +13,17 @@
 		but to the row index. This makes it easy to see row indexes and column
 		indexes from the shown character.
 
-		The example pipe below should produce:
+		The number of rows and the number of columns come from the input message,
+		separated by a single space. When the input message is "63 3", the
+		following output is produces:
 
 		0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0
 		1123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0
 		2123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0
 	-->
-	<Adapter name="UseTextBlockPipe_63_3">
+	<Adapter name="UseTextBlockPipe">
 		<Receiver>
-			<JavaListener name="UseTextBlockPipe_63_3" />
+			<JavaListener name="UseTextBlockPipe" />
 		</Receiver>
 		<Pipeline>
 			<pipe className="org.wearefrank.ladybug.ff.test.webapp.TextBlockTestPipe"
