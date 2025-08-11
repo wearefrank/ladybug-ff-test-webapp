@@ -51,12 +51,10 @@ public class ToStreamPipe extends FixedForwardPipe {
                 }
                 case BINARY_EMPTY: {
                     InputStream resultIs = new ByteArrayInputStream(new byte[] {});
-                    Message m = new Message(resultIs);
                     return new PipeRunResult(getSuccessForward(), resultIs);
                 }
                 case CHARACTER_EMPTY: {
                     Reader resultReader = new StringReader("");
-                    Message m = new Message(resultReader);
                     return new PipeRunResult(getSuccessForward(), resultReader);
                 }
             }
