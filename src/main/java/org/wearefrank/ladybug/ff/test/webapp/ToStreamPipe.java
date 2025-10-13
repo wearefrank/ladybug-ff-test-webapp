@@ -19,7 +19,8 @@ public class ToStreamPipe extends FixedForwardPipe {
         BINARY,
         CHARACTER,
         BINARY_EMPTY,
-        CHARACTER_EMPTY
+        CHARACTER_EMPTY,
+        BINARY_ALL_BYTES
     }
 
     private StreamKind streamKind = StreamKind.BINARY;
@@ -56,6 +57,13 @@ public class ToStreamPipe extends FixedForwardPipe {
                 case CHARACTER_EMPTY: {
                     Reader resultReader = new StringReader("");
                     return new PipeRunResult(getSuccessForward(), resultReader);
+                }
+                case BINARY_ALL_BYTES: {
+                    byte[] bytes = new byte[256];
+                    for(int i = 0; i < 256; ++i) {
+                        bytes[i] = (byte) i;
+                    }
+                    return new PipeRunResult(getSuccessForward(), new ByteArrayInputStream(bytes));
                 }
             }
         }
