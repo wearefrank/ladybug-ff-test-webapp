@@ -44,4 +44,13 @@
             <EchoPipe name="read-empty" />
         </Pipeline>
     </Adapter>
+    <Adapter name="UseToStreamPipeBinaryAllBytes">
+        <Receiver>
+            <JavaListener name="UseToStreamPipeBinaryAllBytes"></JavaListener>
+        </Receiver>
+        <Pipeline>
+            <Pipe className="org.wearefrank.ladybug.ff.test.webapp.ToStreamPipe" name="testPipe"
+                  streamKind="BINARY_ALL_BYTES" />
+        </Pipeline>
+    </Adapter>
 </Configuration>
