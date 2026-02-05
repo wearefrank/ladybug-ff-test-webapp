@@ -12,9 +12,8 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.frankframework</groupId>
-			<artifactId>frankframework-bundle-full</artifactId>
+			<artifactId>frankframework-bundle-minimal</artifactId>
 			<version>${ff.version}</version>
-			<scope>compile</scope>
 		</dependency>
 	</dependencies>
 
